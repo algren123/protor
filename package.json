@@ -6,13 +6,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "mongodb": "^3.5.9",
     "next": "latest",
+    "next-auth": "^3.27.3",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "uninstall": "0.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4"
+  },
+  "peerOptionalDependencies": {
+    "mongodb": "^3.6.0"
   }
 }
