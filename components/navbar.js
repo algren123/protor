@@ -1,5 +1,6 @@
 import { signOut } from 'next-auth/client'
 import { useState } from 'react'
+import Link from 'next/link'
 
 
 function Navbar() {
@@ -25,11 +26,13 @@ function Navbar() {
                     Profile
                 </a>
                 </div>
+                <Link href="/addpost">
+                    <span className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3 lg:mt-0 cursor-pointer">Add post</span>
+                </Link>
                 <div>
-                    <a href="#" className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3 lg:mt-0">Add post</a>
-                </div>
-                <div>
-                    <button onClick={() => signOut()} className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3 lg:mt-0">Logout</button>
+                    <button onClick={() => {
+                        signOut();
+                    }} className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3 lg:mt-0">Logout</button>
                 </div>
             </div>
         </nav>

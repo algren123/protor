@@ -6,18 +6,8 @@ export default NextAuth({
         Providers.Google({
             clientId: process.env.GOOGLE_CLIENT,
             clientSecret: process.env.GOOGLE_SECRET,
+            authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
           }),
-        // Providers.Email({
-        //     server: {
-        //         host: '',
-        //         port: '',
-        //         auth: {
-        //             user: '',
-        //             pass: ''
-        //         }
-        //     },
-        //     form: '',
-        // })
     ],
 
     database: process.env.DATABASE_URL,
