@@ -1,0 +1,6 @@
+input[type='radio'] + label {
+  border: solid 2px transparent;
+}
+input[type='radio']:checked + label {
+  border: solid 2px #eb8258;
+}

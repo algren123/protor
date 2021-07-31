@@ -3,6 +3,7 @@ let Post = require('../models/post.model');
 
 router.route('/').get((req, res) => {
     Post.find()
+        .sort({ updatedAt: -1 })
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error ' + err));
 });
@@ -30,5 +31,34 @@ router.route('/addpost').post((req, res) => {
         .then(() => res.json('Post added!'))
         .catch((err) => res.status(400).json('Error ' + err));
 });
+
+router.route('/:id').get((req, res) => {
+    Post.findById(req.params.id)
+        .then(post => res.json(post))
+        .catch(err => res.status(400).json('Error ' + err));
+});
+
+router.route('/:id').delete((req, res) => {
+    Post.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Post deleted'))
+        .catch(err => res.status(400).json('Error ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+    Post.findById(req.params.id)
+        .then(post => {
+            post.username = req.body.username;
+            post.email = req.body.email;
+            post.profilePic = req.body.profilePic;
+            post.type = req.body.type;
+            post.description = req.body.description;
+            post.budget = req.body.budget;
+            post.location = req.body.location;
+
+            post.save()
+                .then(() => res.json('Post updated'))
+                .catch(err => res.status(400).json('Error: ' + err));
+        });
+})
 
 module.exports = router;

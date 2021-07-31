@@ -7,8 +7,12 @@ module.exports = {
       spacing: {
         '108': '27rem',
         '120': '30rem',
-        '132': '33rem'
+        '132': '33rem',
+        '144': '36rem'
       },
+      fontSize: {
+        'responsive': '50vw'
+      }
     },
     colors: {
       'primary': {
