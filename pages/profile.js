@@ -24,7 +24,7 @@ const Post = props => {
             }
             <h3 className="text-vw text-primary-500 my-3 font-semibold">Posted at { time } on { date }</h3>
             <div className="text-center my-5">
-                <button className="bg-primary font-semibold rounded-full px-10 py-1 w-50" onClick={() => {props.deletePost(props.post._id)} }><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                <button className="bg-primary font-semibold rounded-full px-10 py-1 w-50" onClick={() => {props.deletePost(props.post._id)} }><i className="fas fa-trash-alt mr-2"></i>Delete</button>
             </div>
         </div>
     )
@@ -80,7 +80,7 @@ function Profile() {
             </div>
         </div>
         }
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
         </>
     )
 }

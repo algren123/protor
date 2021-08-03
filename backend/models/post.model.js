@@ -7,6 +7,7 @@ const postSchema = new Schema({
     email: String,
     profilePic: String,
     type: String,
+    profession: String,
     description: String,
     budget: Number,
     location: String

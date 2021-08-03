@@ -13,6 +13,7 @@ router.route('/addpost').post((req, res) => {
     const email = req.body.email;
     const profilePic = req.body.profilePic;
     const type = req.body.type;
+    const profession = req.body.profession;
     const description = req.body.description;
     const budget = Number(req.body.budget);
     const location = req.body.location;
@@ -22,6 +23,7 @@ router.route('/addpost').post((req, res) => {
         email,
         profilePic,
         type,
+        profession,
         description,
         budget,
         location
@@ -51,6 +53,7 @@ router.route('/update/:id').post((req, res) => {
             post.email = req.body.email;
             post.profilePic = req.body.profilePic;
             post.type = req.body.type;
+            post.profession = req.body.profession;
             post.description = req.body.description;
             post.budget = req.body.budget;
             post.location = req.body.location;
