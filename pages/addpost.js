@@ -73,8 +73,7 @@ function addPost() {
                 method: 'post',
                 url: 'https://protor-backend.herokuapp.com/posts/addpost',
                 data: postData
-            })
-                .then(window.location.href="/")
+            });
         }
     }
 
