@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { session, signOut, useSession } from "next-auth/client";
-import Navbar from '../components/navbar';
+import Navbar from './navbar';
 import axios from 'axios';
 
 const Post = props => {

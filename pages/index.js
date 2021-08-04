@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Landing } from '../components/landing'
-import Splash from './splash'
+import Splash from '../components/splash'
 import React from 'react'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
