@@ -97,7 +97,7 @@ function Splash() {
                 <h1 className="text-xl text-center text-cadet-blue-50 cursor-default my-5">Filter by profession</h1>
                 <select name="professionFilter" defaultValue="" id="professionFilter" onChange={(e) => setProfessionFilter(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2">
                     <option value="" disabled>Select Profession</option>
-                    { professions.map(profession => <option key={profession} value={profession}>{profession}</option>)}
+                    { professions.map(profession => <option key={profession} value={profession}>{profession}</option>) }
                 </select>
                 <button onClick={() => setProfessionFilter('')} className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3">Reset Filter</button>
                 { postList(postType, professionFilter) }
