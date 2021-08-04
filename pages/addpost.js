@@ -69,7 +69,7 @@ function addPost() {
                 'location': postcode.toUpperCase()
             }
     
-            return axios.post('http://localhost:5000/posts/addpost', postData)
+            return axios.post('https://protor-backend.herokuapp.com/posts/addpost', postData)
                 .then(window.location.href="/")
         }
     }

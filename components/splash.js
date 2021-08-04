@@ -43,7 +43,7 @@ function Splash() {
 
     // Fetches the posts from the DB
     useEffect(() => {
-        axios.get('http://localhost:5000/posts/')
+        axios.get('https://protor-backend.herokuapp.com/posts/')
             .then(res => setPosts(res.data))
             .catch(err => console.log(err))
     }, [setPosts]);

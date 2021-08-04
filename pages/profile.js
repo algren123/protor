@@ -35,13 +35,13 @@ function Profile() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/posts/')
+        axios.get('https://protor-backend.herokuapp.com/posts/')
             .then(res => setPosts(res.data))
             .catch(err => console.log(err))
     }, [setPosts]);
 
     function deletePost(id) {
-        axios.delete('http://localhost:5000/posts/' + id)
+        axios.delete('https://protor-backend.herokuapp.com/posts/' + id)
             .then(res => console.log(res.data));
 
         setPosts(posts.filter(el => el._id !== id));
