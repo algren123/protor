@@ -61,7 +61,7 @@ function Profile() {
     return (
         <>
         { !session ? <Login /> :
-        <div className="h-full bg-dark-grey">
+        <div className="min-h-screen h-full bg-dark-grey">
             <Navbar />
             <div className="text-center">
                 <h1 className="text-5xl text-primary font-bold my-10 cursor-default">Your Profile</h1>

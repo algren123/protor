@@ -86,7 +86,7 @@ function addPost() {
                 <div className="bg-dark-grey h-screen">
                 <Navbar />
                 <div className="bg-dark-grey flex justify-center items-center">
-                    <div className='bg-light-grey text-center mt-16 lg:mt-32 w-72 lg:w-120 h-144 rounded-md'>
+                    <div className='bg-light-grey text-center mt-16 lg:mt-32 w-72 lg:w-120 min-h-144 rounded-md'>
                         <div className={ stageOne ? 'block' : 'hidden'}>
                             <h1 className="text-5xl text-primary-500 mt-8 font-semibold">Add post</h1>
                             <h3 className="text-3xl text-cadet-blue-50 mt-10 font-semibold">What type of post is this?</h3>
