@@ -14,6 +14,7 @@ const Post = props => {
                 <img className="w-12 h-12" src={props.post.profilePic} alt="User Profile Picture" />
                 <div className="flex flex-col items-center">
                     <h1 className="flex text-2xl text-primary-500 ml-5 font-semibold">{props.post.user}</h1>
+                    <h1 className="flex text-l text-primary opacity-80 ml-5 font-semibold">{props.post.distance} miles away</h1>
                     <h2 className="flex text-xl text-cadet-blue opacity-80 ml-5 font-semibold">{ 
                         props.post.type === "request" ? <span>Looking for a <span className="text-cadet-blue-50 underline opacity-80">{props.post.profession}</span></span>
                         : <span>Offering <span className="text-cadet-blue-50 underline opacity-80">{props.post.profession}</span> services</span>
@@ -37,34 +38,62 @@ function Splash() {
     // Checks if user is logged in
     const [session, loading] = useSession();
 
+    const [userInfo, setUserInfo] = useState(Object);
     const [postType, setPostType] = useState('request');
-    const [posts, setPosts] = useState([]);
     const [professionFilter, setProfessionFilter] = useState('');
+    const [postcodeExists, setPostcodeExists] = useState(false);
+    let [posts, setPosts] = useState([]);
+    let sortedPosts = [];
 
-    // Fetches the posts from the DB
     useEffect(() => {
-        axios.get('https://protor-backend.herokuapp.com/posts/')
-            .then(res => setPosts(res.data))
-            .catch(err => console.log(err))
-    }, [setPosts]);
+        // Fetches the posts from the DB
+        axios.get('http://localhost:5000/posts')
+            .then(res => {
+                setPosts(res.data);
+            })
+            .catch(err => console.log(err));
+
+        async function getUser() {
+            const user = await axios.get('http://localhost:5000/users?email=' + session.user.email)
+                                    .then((res) => {
+                                        return res.data[0]
+                                    });
+            setUserInfo(user);
+        };
+
+        if (session) {
+            getUser().then(() => userInfo.postcode ? setPostcodeExists(true) : setPostcodeExists(false));
+        };
+    }, [setPosts, postcodeExists, userInfo.postcode]);
+
+    // function getDistances() {
+    //     return 
+    // };
 
     // Filters the posts based on the type [request/offer]
     function postList(type, profession) {
-        let sortedPosts = [];
         sortedPosts = posts.filter(post => post.type === type);
 
         if (profession !== '') {
             sortedPosts = sortedPosts.filter(post => post.profession === profession);
         }
 
+        if (session && userInfo.postcode) {
+            sortedPosts.map(async (post) => {
+                await calculateDistance(userInfo.postcode, post.location).then((res) => {
+                    post.distance = res;
+                })
+            })
+        }
+
         if (!sortedPosts.length) {
             return <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">There are not posts available for {profession}. Feel free to make one!</h1>
         } else {
-            return sortedPosts.map(currentPost => {
-                return <Post post={currentPost} key={currentPost._id} />
-            });
-        }
-
+                return sortedPosts.map(currentPost => {
+                    console.log(currentPost.distance)
+                    return <Post post={currentPost} key={currentPost._id}/>
+                });
+        };
     };
 
     let name = session.user.name;
@@ -82,7 +111,60 @@ function Splash() {
         'Tiler'
     ];
 
-    if ( typeof window !== "undefined" && loading) return null;
+    // Get lat/lon for user postcode
+    async function getLatLon1(postcode) {
+        const result = await axios.get('http://api.postcodes.io/postcodes?q=' + postcode)
+                                  .then((res) => {
+                                        return res.data.result[0]
+                                    }).catch(err => console.log(err))
+        return [result.latitude, result.longitude]
+    }
+
+    // Get lat/lon for post postcode
+    async function getLatLon2(postcode) {
+        const result = await axios.get('http://api.postcodes.io/postcodes?q=' + postcode)
+                                  .then((res) => {
+                                        return res.data.result[0]
+                                    }).catch(err => console.log(err))
+        return [result.latitude, result.longitude]
+    }
+
+    // Get the distance in miles between the two postcodes
+    function getDistance(lat1, lon1, lat2, lon2) {
+        const R = 3959; // Radius of the earth in miles
+        let dLat = degreeToRad(lat2-lat1);
+        let dLon = degreeToRad(lon2-lon1);
+
+        let a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(degreeToRad(lat1)) * Math.cos(degreeToRad(lat2)) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+        
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        let d = R * c; // Distance in miles
+
+        return d.toFixed(1);
+    }
+
+    // Convert degree to radius
+    function degreeToRad(deg) {
+        return deg * (Math.PI/180);
+    }
+
+    // Calculate distance to miles
+    async function calculateDistance(postcode1, postcode2) {
+        const latLon1 = await getLatLon1(postcode1);
+        const lat1 = latLon1[0];
+        const lon1 = latLon1[1];
+
+        const latLon2 = await getLatLon2(postcode2);
+        const lat2 = latLon2[0];
+        const lon2 = latLon2[1];
+
+        return getDistance(lat1, lon1, lat2, lon2);
+    }
+
+    if ( typeof window !== "undefined" && loading ) return null;
 
     return (
         <div className="bg-dark-grey min-h-screen h-full">
