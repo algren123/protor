@@ -14,7 +14,7 @@ const Post = props => {
                 <img className="w-12 h-12" src={props.post.profilePic} alt="User Profile Picture" />
                 <div className="flex flex-col items-center">
                     <h1 className="flex text-2xl text-primary-500 ml-5 font-semibold">{props.post.user}</h1>
-                    <h1 className="flex text-l text-primary opacity-80 ml-5 font-semibold">{props.post.distance ? props.post.distance + 'miles away' : ''}</h1>
+                    <h1 className="flex text-l text-primary opacity-80 ml-5 font-semibold">{props.post.distance ? props.post.distance + ' miles away' : ''}</h1>
                     <h2 className="flex text-xl text-cadet-blue opacity-80 ml-5 font-semibold">{ 
                         props.post.type === "request" ? <span>Looking for a <span className="text-cadet-blue-50 underline opacity-80">{props.post.profession}</span></span>
                         : <span>Offering <span className="text-cadet-blue-50 underline opacity-80">{props.post.profession}</span> services</span>
