@@ -48,12 +48,12 @@ function Profile() {
     const postcodeRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
 
     useEffect(() => {
-        axios.get('http://localhost:5000/posts/')
+        axios.get('http://protor-backend.herokuapp.com/posts/')
             .then(res => setPosts(res.data))
             .catch(err => console.log(err));
 
         async function getUser() {
-            const user = await axios.get('http://localhost:5000/users?email=' + session.user.email)
+            const user = await axios.get('http://protor-backend.herokuapp.com/users?email=' + session.user.email)
                                     .then((res) => {
                                         return res.data[0]
                                     });
@@ -94,7 +94,7 @@ function Profile() {
                 'postcode': postcode
             };
 
-            const userId = await axios.get('http://localhost:5000/users?email=' + session.user.email)
+            const userId = await axios.get('http://protor-backend.herokuapp.com/users?email=' + session.user.email)
                                       .then((res) => {
                                         if (res.status == 200) {
                                                 return res.data[0]._id
@@ -102,7 +102,7 @@ function Profile() {
                                         })
                                       .catch((err) => console.log(err))
 
-            await axios.post('http://localhost:5000/users/update/' + userId, userData)
+            await axios.post('http://protor-backend.herokuapp.com/users/update/' + userId, userData)
                         .then(res => console.log(res))
                         .then(() => setShowPostcode(false))
         }
@@ -110,7 +110,7 @@ function Profile() {
     }
 
     function deletePost(id) {
-        axios.delete('http://localhost:5000/posts/' + id)
+        axios.delete('http://protor-backend.herokuapp.com/posts/' + id)
             .then(res => console.log(res.data));
 
         setPosts(posts.filter(el => el._id !== id));
