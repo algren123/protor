@@ -114,10 +114,8 @@ function Splash() {
     async function getLatLon(postcode) {
         const result = await axios.get('https://api.postcodes.io/postcodes?q=' + postcode)
                                   .then((res) => {
-                                        console.log(res)
                                         return res.data.result[0]
                                     }).catch(err => console.log(err))
-        console.log(result)
         return [result.latitude, result.longitude]
     }
 
