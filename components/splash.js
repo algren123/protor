@@ -90,7 +90,6 @@ function Splash() {
             return <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">There are not posts available for {profession}. Feel free to make one!</h1>
         } else {
                 return sortedPosts.map(currentPost => {
-                    console.log(currentPost.distance)
                     return <Post post={currentPost} key={currentPost._id}/>
                 });
         };
