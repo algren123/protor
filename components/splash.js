@@ -47,14 +47,14 @@ function Splash() {
 
     useEffect(() => {
         // Fetches the posts from the DB
-        axios.get('http://protor-backend.herokuapp.com/posts')
+        axios.get('https://protor-backend.herokuapp.com/posts')
             .then(res => {
                 setPosts(res.data);
             })
             .catch(err => console.log(err));
 
         async function getUser() {
-            const user = await axios.get('http://protor-backend.herokuapp.com?email=' + session.user.email)
+            const user = await axios.get('https://protor-backend.herokuapp.com?email=' + session.user.email)
                                     .then((res) => {
                                         return res.data[0]
                                     });
