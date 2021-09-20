@@ -111,20 +111,12 @@ function Splash() {
     ];
 
     // Get lat/lon for user postcode
-    async function getLatLon1(postcode) {
+    async function getLatLon(postcode) {
         const result = await axios.get('http://api.postcodes.io/postcodes?q=' + postcode)
                                   .then((res) => {
                                         return res.data.result[0]
                                     }).catch(err => console.log(err))
-        return [result.latitude, result.longitude]
-    }
-
-    // Get lat/lon for post postcode
-    async function getLatLon2(postcode) {
-        const result = await axios.get('http://api.postcodes.io/postcodes?q=' + postcode)
-                                  .then((res) => {
-                                        return res.data.result[0]
-                                    }).catch(err => console.log(err))
+        console.log(result)
         return [result.latitude, result.longitude]
     }
 
@@ -152,11 +144,11 @@ function Splash() {
 
     // Calculate distance to miles
     async function calculateDistance(postcode1, postcode2) {
-        const latLon1 = await getLatLon1(postcode1);
+        const latLon1 = await getLatLon(postcode1);
         const lat1 = latLon1[0];
         const lon1 = latLon1[1];
 
-        const latLon2 = await getLatLon2(postcode2);
+        const latLon2 = await getLatLon(postcode2);
         const lat2 = latLon2[0];
         const lon2 = latLon2[1];
 
