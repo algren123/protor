@@ -54,7 +54,7 @@ function Splash() {
             .catch(err => console.log(err));
 
         async function getUser() {
-            const user = await axios.get('https://protor-backend.herokuapp.com?email=' + session.user.email)
+            const user = await axios.get('https://protor-backend.herokuapp.com/users?email=' + session.user.email)
                                     .then((res) => {
                                         return res.data[0]
                                     });
