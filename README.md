@@ -1,7 +1,7 @@
 [![Lines][license-shield]][license-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-[![Lines][lines]
+[![Lines][lines]]
 
 ## About The Project
 
