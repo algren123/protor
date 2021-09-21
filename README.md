@@ -1,6 +1,6 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-![Lines][lines-shield]
+[![Lines][lines-shield]][lines-url]
 
 ## About The Project
 
@@ -46,3 +46,4 @@ Project Link: [https://github.com/algren123/protor](https://github.com/algren123
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/algren-pauna/
 [lines-shield]: https://img.shields.io/tokei/lines/github/algren123/protor?color=purple&style=for-the-badge
+[lines-url]: https://github.com/algren123/protor
