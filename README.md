@@ -26,6 +26,10 @@ Contributions are very welcome. Please follow the below steps:
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
 ## Contact
 
 Algren Pauna - [@algren_m](https://twitter.com/algren_m) - algren.pauna@gmail.com
