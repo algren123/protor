@@ -1,4 +1,3 @@
-[![Lines][license-shield]][license-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 ![Lines][lines-shield]
@@ -43,7 +42,7 @@ Project Link: [https://github.com/algren123/protor](https://github.com/algren123
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-url]: https://github.com/algren123/protor/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/algren-pauna/
 [lines-shield]: https://img.shields.io/tokei/lines/github/algren123/protor?color=purple&style=for-the-badge
