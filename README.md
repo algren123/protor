@@ -15,6 +15,7 @@ Protor is a public board where users can either post a request for tradesmen ser
 * [Node.JS](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
+* [TailwindCSS](https://tailwindcss.com/)
 
 ## Contributing
 
