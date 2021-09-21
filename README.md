@@ -1,6 +1,6 @@
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 [![Lines][lines-shield]][lines-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 ## About The Project
 
