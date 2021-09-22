@@ -116,7 +116,7 @@ function Profile() {
         setPosts(posts.filter(el => el._id !== id));
     };
 
-    function postList() {
+    function postProfileList() {
         let sortedPosts = [];
         sortedPosts = posts.filter(post => post.email === session.user.email);
         return sortedPosts.map(currentPost => {
@@ -171,7 +171,7 @@ function Profile() {
                     </div>
                 <div className="flex flex-col">
                     <h1 className="text-5xl text-primary font-semibold my-10 self-center">Posts</h1>
-                    { postList() }
+                    { postProfileList() }
                 </div>
             </div>
         </div>
