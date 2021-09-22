@@ -1,29 +1,54 @@
-# Next.js + Tailwind CSS Example
+[![MIT License][license-shield]][license-url]
+[![Lines][lines-shield]][lines-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## About The Project
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+https://protor.vercel.app/
 
-## Preview
+Protor is a public board where users can either post a request for tradesmen services (ex. user's boiler broke and he made a post looking for a plumber) or professional tradesmen can advertise their services.
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+### Built With
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+* [Next.JS](https://nextjs.org/)
+* [React](https://reactjs.org/)
+* [Node.JS](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [TailwindCSS](https://tailwindcss.com/)
 
-## Deploy your own
+## Contributing
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+Contributions are very welcome. Please follow the below steps:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## How to use
+## License
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+Distributed under the MIT License. See `LICENSE` for more information.
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Contact
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Algren Pauna - [@algren_m](https://twitter.com/algren_m) - algren.pauna@gmail.com
+
+Project Link: [https://github.com/algren123/protor](https://github.com/algren123/protor)
+
+## Acknowledgements
+* [Img Shields](https://shields.io)
+* [Choose an Open Source License](https://choosealicense.com)
+* [GitHub Pages](https://pages.github.com)
+* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* [Font Awesome](https://fontawesome.com)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/algren123/protor/blob/main/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/algren-pauna/
+[lines-shield]: https://img.shields.io/tokei/lines/github/algren123/protor?color=purple&style=for-the-badge
+[lines-url]: https://github.com/algren123/protor
