@@ -41,9 +41,25 @@ function Splash() {
     const [userInfo, setUserInfo] = useState(Object);
     const [postType, setPostType] = useState('request');
     const [professionFilter, setProfessionFilter] = useState('');
+    const [sorting, setSorting] = useState('');
     const [postcodeExists, setPostcodeExists] = useState(false);
     let [posts, setPosts] = useState([]);
     let sortedPosts = [];
+
+    let name = session.user.name;
+    let firstName = name.split(' ')[0];
+
+    const professions = [
+        'Builder',
+        'Carpenter',
+        'Electrician',
+        'Gardener',
+        'Handyman',
+        'Painter',
+        'Plumber',
+        'Roofer',
+        'Tiler'
+    ];
 
     useEffect(() => {
         // Fetches the posts from the DB
@@ -66,24 +82,39 @@ function Splash() {
         };
     }, [setPosts, postcodeExists, userInfo.postcode]);
 
-    // function getDistances() {
-    //     return 
-    // };
-
     // Filters the posts based on the type [request/offer]
-    function postList(type, profession) {
+    function postList(type, profession, sorting) {
         sortedPosts = posts.filter(post => post.type === type);
 
+        // Profession Filter
         if (profession !== '') {
             sortedPosts = sortedPosts.filter(post => post.profession === profession);
         }
 
+        // Calculating distance
         if (session && userInfo.postcode) {
             sortedPosts.map(async (post) => {
                 await calculateDistance(userInfo.postcode, post.location).then((res) => {
                     post.distance = res;
                 })
             })
+        }
+
+        // Sorting filter
+        if (sorting !== '') {
+            if (sorting === 'distance') {
+                sortedPosts.sort(function (a, b) {
+                    return a.distance - b.distance;
+                });
+            } else if (sorting === 'budgetAsc') {
+                sortedPosts.sort(function (a, b) {
+                    return a.budget - b.budget
+                });
+            } else if (sorting === 'budgetDsc') {
+                sortedPosts.sort(function (a, b) {
+                    return b.budget - a.budget
+                });
+            }
         }
 
         if (!sortedPosts.length) {
@@ -95,20 +126,12 @@ function Splash() {
         };
     };
 
-    let name = session.user.name;
-    let firstName = name.split(' ')[0];
-
-    const professions = [
-        'Builder',
-        'Carpenter',
-        'Electrician',
-        'Gardener',
-        'Handyman',
-        'Painter',
-        'Plumber',
-        'Roofer',
-        'Tiler'
-    ];
+    function resetFilter() {
+        setProfessionFilter('');
+        setSorting('');
+        document.getElementById('professionFilter').value = "";
+        document.getElementById('sortingFilter').value = "";
+    }
 
     // Get lat/lon for user postcode
     async function getLatLon(postcode) {
@@ -166,13 +189,27 @@ function Splash() {
                 <button onClick={() => setPostType('service')} className={(postType === 'service' ? "bg-primary border-transparent border-2 " : "bg-light-grey border-primary border-2 ") + "text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0"}>Professionals</button>
             </div>
             <div className="flex flex-col items-center justify-center">
-                <h1 className="text-xl text-center text-cadet-blue-50 cursor-default my-5">Filter by profession</h1>
-                <select name="professionFilter" defaultValue="" id="professionFilter" onChange={(e) => setProfessionFilter(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2">
-                    <option value="" disabled>Select Profession</option>
-                    { professions.map(profession => <option key={profession} value={profession}>{profession}</option>) }
-                </select>
-                <button onClick={() => setProfessionFilter('')} className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3">Reset Filter</button>
-                { postList(postType, professionFilter) }
+                <div className="flex flex-row">
+                    <div className="flex flex-col items-center justify-center mx-10">
+                        <h1 className="text-xl text-center text-cadet-blue-50 cursor-default my-5">Filter by profession</h1>
+                        <select name="professionFilter" defaultValue="" id="professionFilter" onChange={(e) => setProfessionFilter(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2">
+                            <option value="" disabled>Select Profession</option>
+                            { professions.map(profession => <option key={profession} value={profession}>{profession}</option>) }
+                        </select>
+                    </div>
+                    <div className="flex flex-col items-center justify-center mx-10">
+                        <h1 className="text-xl text-center text-cadet-blue-50 cursor-default my-5">Sort</h1>
+                        <select name="sortingFilter" defaultValue="" id="sortingFilter" onChange={(e) => setSorting(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2 text-center">
+                            <option value="" disabled>Sort</option>
+                            <option value="budgetAsc">Budget Ascending</option>
+                            <option value="budgetDsc">Budget Descending</option>
+                            { userInfo.postcode ? <option value="distance">Distance</option> : ""}
+                        </select>
+                    </div>
+                </div>
+                <button onClick={() => resetFilter()} className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3">Reset</button>
+
+                { postList(postType, professionFilter, sorting) }
             </div>
         </div>
     )
