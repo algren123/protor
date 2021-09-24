@@ -69,18 +69,18 @@ function Splash() {
             })
             .catch(err => console.log(err));
 
-        async function getUser() {
+        if (session) {
+            getUser().then(() => userInfo.postcode ? setPostcodeExists(true) : setPostcodeExists(false));
+        };
+    }, [setPosts, postcodeExists, userInfo.postcode]);
+
+    async function getUser() {
             const user = await axios.get('https://protor-backend.herokuapp.com/users?email=' + session.user.email)
                                     .then((res) => {
                                         return res.data[0]
                                     });
             setUserInfo(user);
         };
-
-        if (session) {
-            getUser().then(() => userInfo.postcode ? setPostcodeExists(true) : setPostcodeExists(false));
-        };
-    }, [setPosts, postcodeExists, userInfo.postcode]);
 
     // Filters the posts based on the type [request/offer]
     function postList(type, profession, sorting) {
