@@ -199,8 +199,8 @@ function Splash() {
                     <div className="flex flex-col mx-auto md:mx-3 items-center">
                         <select name="sortingFilter" defaultValue="" id="sortingFilter" onChange={(e) => setSorting(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2 text-center">
                             <option value="" disabled>Sort</option>
-                            <option value="budgetAsc">Budget Ascending</option>
-                            <option value="budgetDsc">Budget Descending</option>
+                            { postType === 'request' ? <option value="budgetAsc">Budget Ascending</option> : '' }
+                            { postType === 'request' ? <option value="budgetDsc">Budget Descending</option> : '' }
                             { userInfo.postcode ? <option value="distance">Distance</option> : ""}
                         </select>
                     </div>
