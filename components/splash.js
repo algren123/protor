@@ -189,16 +189,14 @@ function Splash() {
                 <button onClick={() => setPostType('service')} className={(postType === 'service' ? "bg-primary border-transparent border-2 " : "bg-light-grey border-primary border-2 ") + "text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0"}>Professionals</button>
             </div>
             <div className="flex flex-col items-center justify-center">
-                <div className="flex flex-row">
-                    <div className="flex flex-col items-center justify-center mx-10">
-                        <h1 className="text-xl text-center text-cadet-blue-50 cursor-default my-5">Filter by profession</h1>
-                        <select name="professionFilter" defaultValue="" id="professionFilter" onChange={(e) => setProfessionFilter(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2">
+                <div className="flex flex-wrap lg:flex-col">
+                    <div className="flex flex-col mx-auto lg:mx-3 items-center justify-center">
+                        <select name="professionFilter" defaultValue="" id="professionFilter" onChange={(e) => setProfessionFilter(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 mb-3 rounded-md px-5">
                             <option value="" disabled>Select Profession</option>
                             { professions.map(profession => <option key={profession} value={profession}>{profession}</option>) }
                         </select>
                     </div>
-                    <div className="flex flex-col items-center justify-center mx-10">
-                        <h1 className="text-xl text-center text-cadet-blue-50 cursor-default my-5">Sort</h1>
+                    <div className="flex flex-col mx-auto lg:mx-3 items-center justify-center">
                         <select name="sortingFilter" defaultValue="" id="sortingFilter" onChange={(e) => setSorting(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2 text-center">
                             <option value="" disabled>Sort</option>
                             <option value="budgetAsc">Budget Ascending</option>
