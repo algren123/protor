@@ -190,13 +190,13 @@ function Splash() {
             </div>
             <div className="flex flex-col items-center justify-center">
                 <div className="flex flex-wrap lg:flex-col">
-                    <div className="flex flex-col mx-auto lg:mx-3 items-center justify-center">
+                    <div className="flex flex-col mx-auto md:mx-3 items-center">
                         <select name="professionFilter" defaultValue="" id="professionFilter" onChange={(e) => setProfessionFilter(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 mb-3 rounded-md px-5">
                             <option value="" disabled>Select Profession</option>
                             { professions.map(profession => <option key={profession} value={profession}>{profession}</option>) }
                         </select>
                     </div>
-                    <div className="flex flex-col mx-auto lg:mx-3 items-center justify-center">
+                    <div className="flex flex-col mx-auto md:mx-3 items-center">
                         <select name="sortingFilter" defaultValue="" id="sortingFilter" onChange={(e) => setSorting(e.target.value)} className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md px-2 text-center">
                             <option value="" disabled>Sort</option>
                             <option value="budgetAsc">Budget Ascending</option>
