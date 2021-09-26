@@ -43,6 +43,8 @@ Project Link: [https://github.com/algren123/protor](https://github.com/algren123
 * [GitHub Pages](https://pages.github.com)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [Font Awesome](https://fontawesome.com)
+* [Vercel](https://vercel.com/)
+* [Heroku](https://heroku.com/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
