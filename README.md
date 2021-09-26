@@ -4,7 +4,7 @@
 
 ## About The Project
 
-https://protor.vercel.app/
+[Live Link](https://protor.uk/)
 
 Protor is a public board where users can either post a request for tradesmen services (ex. user's boiler broke and he made a post looking for a plumber) or professional tradesmen can advertise their services.
 
@@ -35,7 +35,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Algren Pauna - [@algren_m](https://twitter.com/algren_m) - algren.pauna@gmail.com
 
-Project Link: [https://github.com/algren123/protor](https://github.com/algren123/protor)
+[Project Link](https://github.com/algren123/protor)
 
 ## Acknowledgements
 * [Img Shields](https://shields.io)
