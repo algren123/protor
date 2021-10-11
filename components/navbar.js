@@ -11,7 +11,7 @@ function Navbar() {
         <nav className="flex items-center justify-between flex-wrap bg-light-grey px-6 lg:px-24">
             <div className="flex items-center flex-shrink-0 text-white mr-6 cursor-pointer">
                 <a href="/#" className="tracking-tight">
-                    <img src="/logo-transparent.png" class="w-20 h-20" />
+                    <img src="/logo-transparent.png" className="w-20 h-20" />
                 </a>
             </div>
             <div className="block lg:hidden">
@@ -29,21 +29,21 @@ function Navbar() {
                     </Link>
                 </div>
                 { session ?
-                <div class="flex flex-col w-28 mx-auto lg:flex-row lg:w-auto">
+                <div className="flex flex-col w-28 mx-auto lg:flex-row lg:w-auto">
                     <Link href="/addpost">
                         <span className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3 lg:mt-0 cursor-pointer">Add post</span>
                     </Link>
                     <button onClick={() => {
                         signOut();
-                    }} className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mb-6 mx-0 lg:mx-3 lg:mt-0 lg:mb-0">Logout</button>
+                    }} className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mb-6 mx-0 lg:mx-3 lg:mt-0 lg:mb-0 cursor-pointer">Logout</button>
                 </div>
                 :
-                <div>
+                <div className="flex flex-col w-28 mx-auto lg:flex-row lg:w-auto">
                     <Link href="/login">
-                        <span className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 mb-6 lg:mb-0 lg:mx-3 lg:mt-0 cursor-pointer">Login</span>
+                        <span className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3 lg:mt-0 cursor-pointer">Login</span>
                     </Link>
                     <Link href="/signup">
-                        <span className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 mb-6 lg:mb-0 lg:mx-3 lg:mt-0 cursor-pointer">Sign up</span>
+                        <span className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mb-6 mx-0 lg:mx-3 lg:mt-0 lg:mb-0 cursor-pointer">Sign up</span>
                     </Link>
                 </div>
                 }
