@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { session, signOut, useSession } from 'next-auth/client';
 import Login from './login';
 import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -174,6 +175,7 @@ function Profile() {
                     { postProfileList() }
                 </div>
             </div>
+            <Footer />
         </div>
         }
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { session, signOut, useSession } from "next-auth/client";
 import Navbar from './navbar';
 import axios from 'axios';
+import Footer from './footer';
 
 const Post = props => {
 
@@ -209,6 +210,7 @@ function Splash() {
 
                 { postList(postType, professionFilter, sorting) }
             </div>
+            <Footer />
         </div>
     )
 }    
