@@ -39,14 +39,14 @@ const Post = (props) => {
       <h3 className="text-vw text-primary-500 my-3 font-semibold">
         Posted at {time} on {date}
       </h3>
-      <div className="text-center my-5">
+      <div className="text-center my-5 flex justify-center">
         <Link href={'/update/' + props.post._id}>
           <button className="bg-primary font-semibold rounded-full px-10 py-1 w-50 mr-2">
             Update
           </button>
         </Link>
         <button
-          className="bg-primary font-semibold rounded-full px-10 py-1 w-50 ml-2"
+          className="bg-primary font-semibold rounded-full px-10 py-1 w-50 ml-2 flex items-center"
           onClick={() => {
             props.deletePost(props.post._id);
           }}
