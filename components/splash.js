@@ -187,10 +187,9 @@ function Splash() {
     const result = await axios
       .get('https://api.postcodes.io/postcodes?q=' + postcode)
       .then((res) => {
-        console.log(res.data.result[0]);
         return res.data.result[0];
       })
-      .catch((err) => console.log(postcode + ' is not found'));
+      .catch(() => console.log(postcode + ' is not found'));
 
     if (result) {
       return [result.latitude, result.longitude];
