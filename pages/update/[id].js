@@ -1,10 +1,11 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import Navbar from '../../components/navbar';
 import Login from '../login';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Link from 'next/link';
 
 function UpdatePost({ posts }) {
   const router = useRouter();
@@ -91,7 +92,7 @@ function UpdatePost({ posts }) {
         <div className="h-screen bg-dark-grey">
           <Navbar />
           <div className="flex justify-center">
-            <div className="bg-light-grey text-center mt-12 h-full lg:py-5 w-72 lg:w-120 rounded-md pb-5">
+            <div className="bg-light-grey text-center mt-12 h-full lg:py-5 w-80 lg:w-120 rounded-md pb-5">
               <h1 className="text-primary-500 text-4xl font-bold mt-6">
                 Edit Post
               </h1>
@@ -148,10 +149,8 @@ function UpdatePost({ posts }) {
                 </h3>
                 <h3
                   className={
-                    type === 'request'
-                      ? 'block '
-                      : 'hidden ' +
-                        'flex flex-col font-bold text-xl text-primary-500 mt-3 lg:mx-20'
+                    'flex flex-col font-bold text-xl text-primary-500 mt-3 lg:mx-20 ' +
+                    (type === 'request' ? 'block' : 'hidden')
                   }
                 >
                   Budget:
@@ -165,12 +164,11 @@ function UpdatePost({ posts }) {
                   />
                 </h3>
               </div>
-              <button
-                className="bg-primary font-semibold rounded-full px-10 py-2 w-50 mb-5 mt-3 mx-2"
-                onClick={() => (window.location.href = '/profile')}
-              >
-                Back
-              </button>
+              <Link href="/profile">
+                <button className="bg-primary font-semibold rounded-full px-10 py-2 w-50 mb-5 mt-3 mx-2">
+                  Back
+                </button>
+              </Link>
               <button
                 className="bg-primary font-semibold rounded-full px-10 py-2 w-50 mb-5 mt-3 mx-2"
                 onClick={() => onSubmit(event)}
