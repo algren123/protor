@@ -40,11 +40,11 @@ const Post = (props) => {
         Posted at {time} on {date}
       </h3>
       <div className="text-center my-5 flex justify-center">
-        <Link href={'/update/' + props.post._id}>
+        <a href={'/update/' + props.post._id}>
           <button className="bg-primary font-semibold rounded-full px-10 py-1 w-50 mr-2">
             Update
           </button>
-        </Link>
+        </a>
         <button
           className="bg-primary font-semibold rounded-full px-10 py-1 w-50 ml-2 flex items-center"
           onClick={() => {
