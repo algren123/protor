@@ -183,25 +183,36 @@ function UpdatePost({ posts }) {
   );
 }
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
+//   const posts = await axios
+//     .get('https://protor-backend.herokuapp.com/posts/')
+//     .then((res) => {
+//       return res.data;
+//     });
+//   const paths = posts.map((post) => ({
+//     params: { id: post._id },
+//   }));
+
+//   console.log(paths);
+
+//   return { paths, fallback: false };
+// }
+
+export async function getServerSideProps(context) {
   const posts = await axios
     .get('https://protor-backend.herokuapp.com/posts/')
     .then((res) => {
       return res.data;
     });
-  const paths = posts.map((post) => ({
-    params: { id: post._id },
-  }));
 
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-  const posts = await axios
-    .get('https://protor-backend.herokuapp.com/posts/')
-    .then((res) => {
-      return res.data;
-    });
+  if (!posts) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       posts,
