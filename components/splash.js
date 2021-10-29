@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { session, signOut, useSession } from 'next-auth/client';
+import { session, useSession } from 'next-auth/client';
 import Navbar from './navbar';
 import axios from 'axios';
 import Footer from './footer';
@@ -72,12 +72,14 @@ const Post = (props) => {
 function Splash() {
   // Checks if user is logged in
   const [session, loading] = useSession();
+  const [loadingScreen, setLoadingScreen] = useState(false);
 
   const [userInfo, setUserInfo] = useState(Object);
   const [postType, setPostType] = useState('request');
   const [professionFilter, setProfessionFilter] = useState('');
   const [sorting, setSorting] = useState('');
   const [postcodeExists, setPostcodeExists] = useState(false);
+  const [distance, setDistance] = useState(null);
   let [posts, setPosts] = useState([]);
   let sortedPosts = [];
 
@@ -96,12 +98,14 @@ function Splash() {
     'Tiler',
   ];
 
+  // Fetches the posts from the DB and sets the postcode status
   useEffect(() => {
-    // Fetches the posts from the DB
+    setLoadingScreen(true);
     axios
       .get('https://protor-backend.herokuapp.com/posts')
       .then((res) => {
         setPosts(res.data);
+        setLoadingScreen(false);
       })
       .catch((err) => console.log(err));
 
@@ -136,12 +140,10 @@ function Splash() {
 
     // Calculating distance
     if (session && userInfo.postcode) {
-      sortedPosts.map(async (post) => {
-        await calculateDistance(userInfo.postcode, post.location).then(
-          (res) => {
-            post.distance = res;
-          }
-        );
+      sortedPosts.map((post) => {
+        calculateDistance(userInfo.postcode, post.location).then((res) => {
+          post.distance = res;
+        });
       });
     }
 
@@ -162,11 +164,21 @@ function Splash() {
       }
     }
 
-    if (!sortedPosts.length) {
+    if (loadingScreen) {
       return (
-        <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">
-          There are not posts available for {profession}. Feel free to make one!
-        </h1>
+        <div className="h-screen">
+          <h1 className="mt-16 text-primary-500 text-2xl font-bold">
+            <img src="/spinner.svg" alt="" srcset="" />
+          </h1>
+        </div>
+      );
+    } else if (!sortedPosts.length) {
+      return (
+        <div className="h-105">
+          <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">
+            There are not posts available for {profession}
+          </h1>
+        </div>
       );
     } else {
       return sortedPosts.map((currentPost) => {
@@ -236,93 +248,95 @@ function Splash() {
   if (typeof window !== 'undefined' && loading) return null;
 
   return (
-    <div className="bg-dark-grey min-h-screen h-full">
-      <Navbar />
-      <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">
-        Hello {firstName},
-      </h1>
-      <h1 className="text-xl lg:text-3xl text-center text-cadet-blue-50 cursor-default my-5">
-        Here are the most recent posts
-      </h1>
-      <div className="flex justify-center mb-10">
-        <button
-          onClick={() => setPostType('request')}
-          className={
-            (postType === 'request'
-              ? 'bg-primary border-transparent border-2 '
-              : 'bg-light-grey border-primary border-2 ') +
-            'text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
-          }
-        >
-          Job Listings
-        </button>
-        <button
-          onClick={() => setPostType('service')}
-          className={
-            (postType === 'service'
-              ? 'bg-primary border-transparent border-2 '
-              : 'bg-light-grey border-primary border-2 ') +
-            'text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
-          }
-        >
-          Professionals
-        </button>
-      </div>
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-col">
-          <div className="flex flex-col mx-auto md:mx-3 items-center">
-            <select
-              name="professionFilter"
-              defaultValue=""
-              id="professionFilter"
-              onChange={(e) => setProfessionFilter(e.target.value)}
-              className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 mb-3 w-52 rounded-md px-5"
-            >
-              <option value="" disabled>
-                Select Profession
-              </option>
-              {professions.map((profession) => (
-                <option key={profession} value={profession}>
-                  {profession}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col mx-auto md:mx-3 items-center">
-            <select
-              name="sortingFilter"
-              defaultValue=""
-              id="sortingFilter"
-              onChange={(e) => setSorting(e.target.value)}
-              className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md w-52 lg:px-2 text-center"
-            >
-              <option value="" disabled>
-                Sort
-              </option>
-              {postType === 'request' ? (
-                <>
-                  <option value="budgetAsc">Budget Ascending</option>
-                  <option value="budgetDsc">Budget Descending</option>
-                </>
-              ) : (
-                ''
-              )}
-              {userInfo.postcode ? (
-                <option value="distance">Distance</option>
-              ) : (
-                ''
-              )}
-            </select>
-          </div>
+    <div>
+      <div className="bg-dark-grey min-h-screen h-full">
+        <Navbar />
+        <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">
+          Hello {firstName},
+        </h1>
+        <h1 className="text-xl lg:text-3xl text-center text-cadet-blue-50 cursor-default my-5">
+          Here are the most recent posts
+        </h1>
+        <div className="flex justify-center mb-10">
+          <button
+            onClick={() => setPostType('request')}
+            className={
+              (postType === 'request'
+                ? 'bg-primary border-transparent border-2 '
+                : 'bg-light-grey border-primary border-2 ') +
+              'text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
+            }
+          >
+            Job Listings
+          </button>
+          <button
+            onClick={() => setPostType('service')}
+            className={
+              (postType === 'service'
+                ? 'bg-primary border-transparent border-2 '
+                : 'bg-light-grey border-primary border-2 ') +
+              'text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
+            }
+          >
+            Professionals
+          </button>
         </div>
-        <button
-          onClick={() => resetFilter()}
-          className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3"
-        >
-          Reset
-        </button>
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col">
+            <div className="flex flex-col mx-auto md:mx-3 items-center">
+              <select
+                name="professionFilter"
+                defaultValue=""
+                id="professionFilter"
+                onChange={(e) => setProfessionFilter(e.target.value)}
+                className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 mb-3 w-52 rounded-md px-5"
+              >
+                <option value="" disabled>
+                  Select Profession
+                </option>
+                {professions.map((profession) => (
+                  <option key={profession} value={profession}>
+                    {profession}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex flex-col mx-auto md:mx-3 items-center">
+              <select
+                name="sortingFilter"
+                defaultValue=""
+                id="sortingFilter"
+                onChange={(e) => setSorting(e.target.value)}
+                className="bg-dark-grey text-cadet-blue-50 outline-none border-primary border-2 rounded-md w-52 lg:px-2 text-center"
+              >
+                <option value="" disabled>
+                  Sort
+                </option>
+                {postType === 'request' ? (
+                  <>
+                    <option value="budgetAsc">Budget Ascending</option>
+                    <option value="budgetDsc">Budget Descending</option>
+                  </>
+                ) : (
+                  ''
+                )}
+                {userInfo.postcode ? (
+                  <option value="distance">Distance</option>
+                ) : (
+                  ''
+                )}
+              </select>
+            </div>
+          </div>
+          <button
+            onClick={() => resetFilter()}
+            className="inline-block text-sm font-semibold px-4 py-2 bg-primary rounded mt-4 mx-0 lg:mx-3"
+          >
+            Reset
+          </button>
 
-        {postList(postType, professionFilter, sorting)}
+          {postList(postType, professionFilter, sorting)}
+        </div>
       </div>
       <Footer />
     </div>

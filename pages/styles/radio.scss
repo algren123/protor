@@ -4,3 +4,7 @@ input[type='radio'] + label {
 input[type='radio']:checked + label {
   border: solid 2px #eb8258;
 }
+
+.min-h-screen {
+  min-height: calc(100vh - 48px);
+}

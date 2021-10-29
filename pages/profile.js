@@ -5,7 +5,6 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Link from 'next/link';
 
 const Post = (props) => {
   const date = props.post.updatedAt.slice(0, 10).split('-').reverse().join('-');
@@ -60,6 +59,7 @@ const Post = (props) => {
 
 function Profile() {
   const [session, loading] = useSession();
+  const [loadingScreen, setLoadingScreen] = useState(false);
   const [posts, setPosts] = useState([]);
 
   // Postcode handlers
@@ -76,6 +76,7 @@ function Profile() {
     /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
 
   useEffect(() => {
+    setLoadingScreen(true);
     axios
       .get('https://protor-backend.herokuapp.com/posts/')
       .then((res) => setPosts(res.data))
@@ -88,6 +89,7 @@ function Profile() {
             session.user.email
         )
         .then((res) => {
+          setLoadingScreen(false);
           return res.data[0];
         });
 
@@ -159,15 +161,33 @@ function Profile() {
   function postProfileList() {
     let sortedPosts = [];
     sortedPosts = posts.filter((post) => post.email === session.user.email);
-    return sortedPosts.map((currentPost) => {
+    if (loadingScreen) {
       return (
-        <Post
-          post={currentPost}
-          deletePost={deletePost}
-          key={currentPost._id}
-        />
+        <div className="h-screen">
+          <h1 className="mt-16 text-primary-500 text-2xl font-bold">
+            <img src="/spinner.svg" alt="" srcset="" />
+          </h1>
+        </div>
       );
-    });
+    } else if (!sortedPosts.length) {
+      return (
+        <div className="h-105">
+          <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">
+            You don't have any posts yet
+          </h1>
+        </div>
+      );
+    } else {
+      return sortedPosts.map((currentPost) => {
+        return (
+          <Post
+            post={currentPost}
+            deletePost={deletePost}
+            key={currentPost._id}
+          />
+        );
+      });
+    }
   }
 
   if (typeof window !== 'undefined' && loading) return null;
@@ -177,102 +197,104 @@ function Profile() {
       {!session ? (
         <Login />
       ) : (
-        <div className="min-h-screen h-full bg-dark-grey">
-          <Navbar />
-          <div className="text-center">
-            <h1 className="text-5xl text-primary font-bold my-10 cursor-default">
-              Your Profile
-            </h1>
-          </div>
-          <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-around">
-            <div className="flex flex-col items-center">
-              <h1 className="hidden lg:block text-5xl text-primary font-semibold my-10 self-center">
-                Your details
+        <div>
+          <div className="min-h-screen h-full bg-dark-grey">
+            <Navbar />
+            <div className="text-center">
+              <h1 className="text-5xl text-primary font-bold my-10 cursor-default">
+                Your Profile
               </h1>
-              <img
-                className="w-32 h-32 mb-3 self-center"
-                src={session.user.image}
-              />
-              <h1 className="text-2xl text-primary font-semibold">
-                Name: {session.user.name}
-              </h1>
-              <h1 className="text-2xl text-primary font-semibold">
-                Email: {session.user.email}
-              </h1>
-              {!postcodeExist ? (
-                <div className="flex flex-col">
-                  <input
-                    type="text"
-                    onChange={(e) => handlePostcodeChange(e)}
-                    name="postcode"
-                    id="postcode"
-                    className={
-                      (invalid ? 'border-primary-600 ' : 'border-primary ') +
-                      'outline-none rounded-md bg-dark-grey mt-8 mb-2 px-5 border-2 text-cadet-blue-50'
-                    }
-                    name="postcode"
-                    id="postcode"
-                  />
-                  <button
-                    className="bg-primary font-semibold rounded-full mt-5 px-10 py-1 w-50"
-                    onClick={(e) => postcodeSubmit(e)}
-                  >
-                    Add postcode
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col w-64 items-center">
-                  <h1 className="text-2xl text-primary font-semibold">
-                    Postcode: {userInfo.postcode}
-                  </h1>
-                  <button
-                    className="bg-primary font-semibold rounded-full mt-5 px-10 py-1 w-50"
-                    onClick={() => setShowPostcode(!showPostcode)}
-                  >
-                    Change postcode
-                  </button>
-                  {showPostcode ? (
-                    <div className="flex flex-col">
-                      <input
-                        type="text"
-                        onChange={(e) => handlePostcodeChange(e)}
-                        name="postcode"
-                        id="postcode"
-                        className={
-                          (invalid
-                            ? 'border-primary-600 '
-                            : 'border-primary ') +
-                          'outline-none rounded-md bg-dark-grey mt-8 mb-2 px-5 border-2 text-cadet-blue-50'
-                        }
-                        name="postcode"
-                        id="postcode"
-                      />
-                      <button
-                        className="bg-primary font-semibold rounded-full px-10 py-1 w-50"
-                        onClick={(e) => postcodeSubmit(e)}
-                      >
-                        Add postcode
-                      </button>
-                      <p
-                        className={
-                          (invalid ? 'block ' : 'hidden ') +
-                          'text-primary-600 font-bold text-center'
-                        }
-                      >
-                        Postcode is incorrect format e.g. "NE10 0ZT"
-                      </p>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
-              )}
             </div>
-            <div className="flex flex-col">
-              <h1 className="text-5xl text-primary font-semibold my-10 self-center">
-                Posts
-              </h1>
-              {postProfileList()}
+            <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-around">
+              <div className="flex flex-col items-center">
+                <h1 className="hidden lg:block text-5xl text-primary font-semibold my-10 self-center">
+                  Your details
+                </h1>
+                <img
+                  className="w-32 h-32 mb-3 self-center"
+                  src={session.user.image}
+                />
+                <h1 className="text-2xl text-primary font-semibold">
+                  Name: {session.user.name}
+                </h1>
+                <h1 className="text-2xl text-primary font-semibold">
+                  Email: {session.user.email}
+                </h1>
+                {!postcodeExist ? (
+                  <div className="flex flex-col">
+                    <input
+                      type="text"
+                      onChange={(e) => handlePostcodeChange(e)}
+                      name="postcode"
+                      id="postcode"
+                      className={
+                        (invalid ? 'border-primary-600 ' : 'border-primary ') +
+                        'outline-none rounded-md bg-dark-grey mt-8 mb-2 px-5 border-2 text-cadet-blue-50'
+                      }
+                      name="postcode"
+                      id="postcode"
+                    />
+                    <button
+                      className="bg-primary font-semibold rounded-full mt-5 px-10 py-1 w-50"
+                      onClick={(e) => postcodeSubmit(e)}
+                    >
+                      Add postcode
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col w-64 items-center">
+                    <h1 className="text-2xl text-primary font-semibold">
+                      Postcode: {userInfo.postcode}
+                    </h1>
+                    <button
+                      className="bg-primary font-semibold rounded-full mt-5 px-10 py-1 w-50"
+                      onClick={() => setShowPostcode(!showPostcode)}
+                    >
+                      Change postcode
+                    </button>
+                    {showPostcode ? (
+                      <div className="flex flex-col">
+                        <input
+                          type="text"
+                          onChange={(e) => handlePostcodeChange(e)}
+                          name="postcode"
+                          id="postcode"
+                          className={
+                            (invalid
+                              ? 'border-primary-600 '
+                              : 'border-primary ') +
+                            'outline-none rounded-md bg-dark-grey mt-8 mb-2 px-5 border-2 text-cadet-blue-50'
+                          }
+                          name="postcode"
+                          id="postcode"
+                        />
+                        <button
+                          className="bg-primary font-semibold rounded-full px-10 py-1 w-50"
+                          onClick={(e) => postcodeSubmit(e)}
+                        >
+                          Add postcode
+                        </button>
+                        <p
+                          className={
+                            (invalid ? 'block ' : 'hidden ') +
+                            'text-primary-600 font-bold text-center'
+                          }
+                        >
+                          Postcode is incorrect format e.g. "NE10 0ZT"
+                        </p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-col">
+                <h1 className="text-5xl text-primary font-semibold my-10 self-center">
+                  Posts
+                </h1>
+                {postProfileList()}
+              </div>
             </div>
           </div>
           <Footer />
