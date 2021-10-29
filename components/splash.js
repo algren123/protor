@@ -26,7 +26,7 @@ const Post = (props) => {
           <h1 className="flex text-l text-primary opacity-80 ml-5 font-semibold">
             {props.post.distance ? props.post.distance + ' miles away' : ''}
           </h1>
-          <h2 className="flex text-xl text-cadet-blue opacity-80 ml-5 font-semibold">
+          <h2 className="flex text-xl text-cadet-blue ml-5 font-semibold">
             {props.post.type === 'request' ? (
               <span>
                 Looking for a{' '}
@@ -261,10 +261,8 @@ function Splash() {
           <button
             onClick={() => setPostType('request')}
             className={
-              (postType === 'request'
-                ? 'bg-primary border-transparent border-2 '
-                : 'bg-light-grey border-primary border-2 ') +
-              'text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
+              (postType === 'request' ? 'bg-primary' : 'bg-light-grey') +
+              ' text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
             }
           >
             Job Listings
@@ -272,10 +270,8 @@ function Splash() {
           <button
             onClick={() => setPostType('service')}
             className={
-              (postType === 'service'
-                ? 'bg-primary border-transparent border-2 '
-                : 'bg-light-grey border-primary border-2 ') +
-              'text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
+              (postType === 'service' ? 'bg-primary' : 'bg-light-grey') +
+              ' text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
             }
           >
             Professionals
