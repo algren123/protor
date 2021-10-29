@@ -8,8 +8,13 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
+          <meta
+            name="description"
+            content="Protor. A webapp to look for or advertise tradesmen services."
+          />
+
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

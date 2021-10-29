@@ -10,7 +10,11 @@ function Navbar() {
     <nav className="flex items-center justify-between flex-wrap bg-light-grey px-6 lg:px-24">
       <div className="flex items-center flex-shrink-0 text-white mr-6 cursor-pointer">
         <a href="/#" className="tracking-tight">
-          <img src="/logo-transparent.png" className="w-20 h-20" />
+          <img
+            src="/logo-transparent.png"
+            className="w-20 h-20"
+            alt="Protor Logo"
+          />
         </a>
       </div>
       <div className="block lg:hidden">
