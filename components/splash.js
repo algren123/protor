@@ -249,7 +249,7 @@ function Splash() {
 
   return (
     <div>
-      <div className="bg-dark-grey min-h-screen h-full">
+      <div className="bg-dark-grey min-h-screen h-full pb-10">
         <Navbar />
         <h1 className="text-3xl lg:text-5xl font-bold text-center text-primary cursor-default mt-10">
           Hello {firstName},

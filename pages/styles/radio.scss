@@ -8,3 +8,20 @@ input[type='radio']:checked + label {
 .min-h-screen {
   min-height: calc(100vh - 48px);
 }
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-thumb {
+  background: #eb8258;
+  border-radius: 30px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e6602a;
+}
+::-webkit-scrollbar-track {
+  background: #333333;
+  border-radius: 0px;
+  box-shadow: inset 0px 0px 0px 0px;
+}

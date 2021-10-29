@@ -198,7 +198,7 @@ function Profile() {
         <Login />
       ) : (
         <div>
-          <div className="min-h-screen h-full bg-dark-grey">
+          <div className="min-h-screen h-full bg-dark-grey pb-10">
             <Navbar />
             <div className="text-center">
               <h1 className="text-5xl text-primary font-bold my-10 cursor-default">
