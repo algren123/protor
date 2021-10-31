@@ -112,13 +112,13 @@ function addPost() {
                       id="requestService"
                     />
                     <label
-                      className="cursor-pointer text-primary text-md font-bold mb-3 bg-dark-grey w-24 lg:w-28 h-40 mx-5 rounded-lg"
+                      className="cursor-pointer text-primary text-md font-bold mb-3 p-2 bg-dark-grey w-24 lg:w-28 h-40 mx-5 rounded-lg"
                       for="requestService"
                     >
                       <span className="text-5xl text-primary mb-5">
                         <i className="fas fa-hand-holding mb-5"></i>
                       </span>
-                      Requesting a service
+                      Request a service
                     </label>
                   </div>
                   <div className="flex flex-col items-center">
@@ -131,13 +131,13 @@ function addPost() {
                       id="offerService"
                     />
                     <label
-                      className="cursor-pointer text-primary text-md font-bold mb-3 bg-dark-grey w-24 lg:w-28 h-40 mx-5 rounded-lg"
+                      className="cursor-pointer text-primary text-md font-bold mb-3 p-2 bg-dark-grey w-24 lg:w-28 h-40 mx-5 rounded-lg"
                       htmlFor="offerService"
                     >
                       <span className="text-3xl text-primary mb-5">
                         <i class="fas fa-wrench my-5 px-5"></i>
                       </span>
-                      Offering a service
+                      Offer a service
                     </label>
                   </div>
                 </div>

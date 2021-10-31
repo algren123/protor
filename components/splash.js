@@ -166,11 +166,9 @@ function Splash() {
 
     if (loadingScreen) {
       return (
-        <div className="h-screen">
-          <h1 className="mt-16 text-primary-500 text-2xl font-bold">
-            <img src="/spinner.svg" alt="" srcset="" />
-          </h1>
-        </div>
+        <h1 className="mt-16 text-primary-500 text-2xl font-bold">
+          <img src="/spinner.svg" alt="" srcset="" />
+        </h1>
       );
     } else if (!sortedPosts.length) {
       return (
@@ -261,8 +259,10 @@ function Splash() {
           <button
             onClick={() => setPostType('request')}
             className={
-              (postType === 'request' ? 'bg-primary' : 'bg-light-grey') +
-              ' text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
+              (postType === 'request'
+                ? 'border-primary text-primary'
+                : 'border-white text-cadet-blue-50') +
+              ' bg-light grey border-4 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
             }
           >
             Job Listings
@@ -270,8 +270,10 @@ function Splash() {
           <button
             onClick={() => setPostType('service')}
             className={
-              (postType === 'service' ? 'bg-primary' : 'bg-light-grey') +
-              ' text-cadet-blue-50 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
+              (postType === 'service'
+                ? 'border-primary text-primary'
+                : 'border-white text-cadet-blue-50') +
+              ' bg-light grey border-4 text-sm font-semibold px-4 py-2 rounded mt-4 mx-3 lg:mt-0'
             }
           >
             Professionals

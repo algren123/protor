@@ -14,6 +14,10 @@ class MyDocument extends Document {
             name="description"
             content="Protor. A webapp to look for or advertise tradesmen services."
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          ></link>
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
@@ -25,6 +29,18 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap"
             rel="stylesheet"
           />
+          <style jsx global>{`
+            html,
+            body {
+              padding: 0;
+              margin: 0;
+              font-family: Poppins;
+            }
+
+            * {
+              box-sizing: border-box;
+            }
+          `}</style>
         </Head>
         <body>
           <Main />

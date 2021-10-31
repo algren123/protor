@@ -163,11 +163,9 @@ function Profile() {
     sortedPosts = posts.filter((post) => post.email === session.user.email);
     if (loadingScreen) {
       return (
-        <div className="h-screen">
-          <h1 className="mt-16 text-primary-500 text-2xl font-bold">
-            <img src="/spinner.svg" alt="" srcset="" />
-          </h1>
-        </div>
+        <h1 className="mt-16 text-primary-500 text-2xl font-bold">
+          <img src="/spinner.svg" alt="" srcset="" />
+        </h1>
       );
     } else if (!sortedPosts.length) {
       return (
