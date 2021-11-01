@@ -3,8 +3,6 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 ## About The Project
-![image](https://user-images.githubusercontent.com/24513020/139591525-35e54a23-6589-473d-af0f-3874062b21ff.png)
-
 [Live Link](https://protor.uk/)
 
 Protor is a public board where users can either post a request for tradesmen services (ex. user's boiler broke and he made a post looking for a plumber) or professional tradesmen can advertise their services.
